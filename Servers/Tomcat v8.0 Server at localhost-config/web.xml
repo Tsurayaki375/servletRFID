@@ -109,7 +109,6 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-
   <!-- The JSP page compiler and execution servlet, which is the mechanism  -->
   <!-- used by Tomcat to support JSP pages.  Traditionally, this servlet    -->
   <!-- is mapped to the URL pattern "*.jsp".  This servlet supports the     -->

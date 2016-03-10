@@ -1,4 +1,4 @@
-package myServlet;
+package servletUser;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 public class Db {
-	private String url = "jdbc:mysql://localhost/securfid";
-	private String user = "root";
-	private String pass = "root";
+	private final String url = "jdbc:mysql://localhost/securfid";
+	private final String user = "root";
+	private final String pass = "root";
 
 	public String identificationDb(String UID, String terminalID) {
 		String nom = "", prenom = "", poste = "", result = "";

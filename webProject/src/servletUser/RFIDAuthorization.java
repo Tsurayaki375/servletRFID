@@ -1,4 +1,4 @@
-package myServlet;
+package servletUser;
 
 import java.io.IOException;
 import java.io.PrintWriter;
