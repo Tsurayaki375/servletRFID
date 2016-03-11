@@ -34,9 +34,13 @@ public class AddUser extends HttpServlet {
 	 *      response)
 	 */
 	public boolean isInteger(String str) {
-	    return str.matches("[0-9]");
+		return str.matches("[0-9]");
 	}
-	
+
+	public boolean isCorrectLength(String str, int maxLength) {
+		return (str.length() <= maxLength && !str.isEmpty());
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -59,13 +63,12 @@ public class AddUser extends HttpServlet {
 		String prenom = request.getParameter("prenom");
 		String poste = request.getParameter("poste");
 		String lvlSecu = request.getParameter("lvlSecu");
-		
-		
-		
-		if (!isInteger(lvlSecu)) {
+
+		if (!isInteger(lvlSecu) || !isCorrectLength(idCarte, 50) || !isCorrectLength(nom, 25)
+				|| !isCorrectLength(prenom, 25) || !isCorrectLength(poste, 50)) {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/AddUser.html");
-			out.println("<font color=red><center>Le niveau de securite n'est pas valide !</center></font>");
-			rd.include(request, response);
+			out.println("<font color=red><center>Formulaire invalide, veuillez respecter les consignes !</center></font>");
+			rd.include(request, response); 
 		} else {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
