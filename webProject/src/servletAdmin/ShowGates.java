@@ -64,21 +64,21 @@ public class ShowGates extends HttpServlet {
 			sql = "SELECT p_Terminal, p_LvlSecu FROM porte";
 			ResultSet rs = stmt.executeQuery(sql);
 
-			out.println("<TABLE BORDER=1 CELLPADDING=0 CELLSPACING=3 ALIGN=CENTER>");
+			out.println("<table border=1 cellpadding=0 cellspacing=3 align=center>");
 
-			out.println("<TR>");
-			out.println("<TD> ID Terminal :</TD>");
-			out.println("<TD> Niveau de securite :</TD>");
-			out.println("</TR>");
+			out.println("<tr>");
+			out.println("<td> ID Terminal :</td>");
+			out.println("<td> Niveau de securite :</td>");
+			out.println("</tr>");
 
 			while (rs.next()) {
-				out.println("<TR>");
-				out.println("<TD>" + rs.getString("p_Terminal") + "</TD>");
-				out.println("<TD>" + rs.getString("p_LvlSecu") + "</TD>");
-				out.println("</TR>");
+				out.println("<tr>");
+				out.println("<td>" + rs.getString("p_Terminal") + "</td>");
+				out.println("<td>" + rs.getString("p_LvlSecu") + "</td>");
+				out.println("</tr>");
 			}
-			out.println("</TABLE>");
-			out.println("</BODY></HTML>");
+			out.println("</table>");
+			out.println("</body></html>");
 
 			rs.close();
 			stmt.close();

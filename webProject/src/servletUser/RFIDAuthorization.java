@@ -51,12 +51,12 @@ public class RFIDAuthorization extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		if(paramIdCardValue == null && paramIdTerminalValue == null){
-			out.println("Bonjour, veuillez passer votre carte devant le lecteur pour entrer...");	
+			out.println("<h3>Bonjour, veuillez passer votre carte devant le lecteur pour entrer...</h3>");	
 		}
 		else{
 			paramIdTerminalValue = URLDecoder.decode(request.getParameter("idTerminal"), "UTF-8");
 			Db myDb = new Db();
-			out.println(myDb.identificationDb(paramIdCardValue, paramIdTerminalValue));
+			out.println("<h3>" + myDb.identificationDb(paramIdCardValue, paramIdTerminalValue) + "</h3>");
 		}
 		out.close();	
 	}

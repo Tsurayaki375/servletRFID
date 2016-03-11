@@ -64,27 +64,27 @@ public class ShowUsers extends HttpServlet {
 			sql = "SELECT e_ID, e_Nom, e_Prenom, e_Poste, e_LvlSecu  FROM employe";
 			ResultSet rs = stmt.executeQuery(sql);
 
-			out.println("<TABLE BORDER=1 CELLPADDING=0 CELLSPACING=3 ALIGN=CENTER>");
+			out.println("<table border=1 cellpadding=0 cellspacing=3 align=center>");
 
-			out.println("<TR>");
-			out.println("<TD> ID :</TD>");
-			out.println("<TD> Nom :</TD>");
-			out.println("<TD> Prenom :</TD>");
-			out.println("<TD> Poste :</TD>");
-			out.println("<TD> Niveau de securite :</TD>");
-			out.println("</TR>");
+			out.println("<tr>");
+			out.println("<td> ID :</td>");
+			out.println("<td> Nom :</td>");
+			out.println("<td> Prenom :</td>");
+			out.println("<td> Poste :</td>");
+			out.println("<td> Niveau de securite :</td>");
+			out.println("</tr>");
 
 			while (rs.next()) {
-				out.println("<TR>");
-				out.println("<TD>" + rs.getString("e_ID") + "</TD>");
-				out.println("<TD>" + rs.getString("e_Nom") + "</TD>");
-				out.println("<TD>" + rs.getString("e_Prenom") + "</TD>");
-				out.println("<TD>" + rs.getString("e_Poste") + "</TD>");
-				out.println("<TD>" + rs.getInt("e_LvlSecu") + "</TD>");
-				out.println("</TR>");
+				out.println("<tr>");
+				out.println("<td>" + rs.getString("e_ID") + "</td>");
+				out.println("<td>" + rs.getString("e_Nom") + "</td>");
+				out.println("<td>" + rs.getString("e_Prenom") + "</td>");
+				out.println("<td>" + rs.getString("e_Poste") + "</td>");
+				out.println("<td>" + rs.getInt("e_LvlSecu") + "</td>");
+				out.println("</tr>");
 			}
-			out.println("</TABLE>");
-			out.println("</BODY></HTML>");
+			out.println("</table>");
+			out.println("</body></html>");
 
 			rs.close();
 			stmt.close();
