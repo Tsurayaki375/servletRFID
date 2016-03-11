@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ShowUsers
+ * Servlet implementation class ShowGates
  */
 @WebServlet("/admin/ShowGates")
 public class ShowGates extends HttpServlet {

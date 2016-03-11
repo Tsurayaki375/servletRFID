@@ -5,6 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Login Success Page</title>
+<style>
+html{
+	text-align: center;
+}	 
+</style>
 </head>
 <body>
 <%
@@ -21,12 +26,24 @@ for(Cookie cookie : cookies){
 }
 %>
 <h3>Bonjour <%=userName %>, identifiants correct ! Votre ID de session est :<%=sessionID %></h3>
-<br>
 User=<%=user %>
-<br>
+<p>
 <a href="CheckoutPage.jsp">Checkout Page</a>
+</p>
+
 <form action="Logout" method="post">
-<input type="submit" value="Logout" >
+<input type="submit" value="Logout">
 </form>
+
+<h4>Liste des services admin :</h4>
+<p>
+<a href="admin/ShowUsers" target="_blank">Voir les utilisateurs</a>
+</p>
+<p>
+<a href="admin/ShowGates" target="_blank">Voir les portes</a>
+</p>
+<p>
+<a href="admin/AddUser.html" target="_blank">Ajouter un utilisateur</a>
+</p>
 </body>
 </html>

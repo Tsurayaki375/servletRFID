@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `employe` (
   `e_Nom` varchar(25) NOT NULL,
   `e_Prenom` varchar(25) NOT NULL,
   `e_Poste` varchar(50) NOT NULL,
-  `e_LvlSecu` int(11) NOT NULL
+  `e_LvlSecu` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -54,7 +54,7 @@ INSERT INTO `employe` (`e_ID`, `e_Nom`, `e_Prenom`, `e_Poste`, `e_LvlSecu`) VALU
 
 CREATE TABLE IF NOT EXISTS `porte` (
   `p_Terminal` varchar(50) NOT NULL,
-  `p_LvlSecu` int(11) NOT NULL
+  `p_LvlSecu` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --

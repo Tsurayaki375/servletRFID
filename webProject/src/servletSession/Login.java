@@ -42,15 +42,15 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", "Dieu");
 			// setting session to expiry in 30 mins
-			session.setMaxInactiveInterval(1 * 60);
+			session.setMaxInactiveInterval(5 * 60);
 			Cookie userName = new Cookie("user", user);
-			userName.setMaxAge(1 * 60);
+			userName.setMaxAge(5 * 60);
 			response.addCookie(userName);
 			response.sendRedirect("LoginSuccess.jsp");
 		}else{
 	            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
 	            PrintWriter out= response.getWriter();
-	            out.println("<font color=red>Either user name or password is wrong.</font>");
+	            out.println("<font color=red><center>Mauvais username ou password, veuillez reesayer.</center></font>");
 	            rd.include(request, response);
 	        }
 	    }
