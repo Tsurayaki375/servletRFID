@@ -32,12 +32,10 @@ html {
 		<%=userName%>, identifiants correct ! Votre ID de session est :<%=sessionID%></h3>
 	User=<%=user%>
 	<p>
-		<a href="CheckoutPage.jsp">Checkout Page</a>
-	</p>
-
 	<form action="Logout" method="post">
 		<input type="submit" value="Logout">
 	</form>
+	</p>
 
 	<h4>Liste des services admin :</h4>
 	<p>

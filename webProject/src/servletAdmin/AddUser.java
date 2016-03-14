@@ -55,8 +55,9 @@ public class AddUser extends HttpServlet {
 		if (!isInteger(lvlSecu) || !isCorrectLength(idCarte, 50) || !isCorrectLength(nom, 25)
 				|| !isCorrectLength(prenom, 25) || !isCorrectLength(poste, 50)) {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/AddUser.html");
-			out.println("<font color=red><center>Formulaire invalide, veuillez respecter les consignes !</center></font>");
-			rd.include(request, response); 
+			out.println(
+					"<font color=red><center>Formulaire invalide, veuillez respecter les consignes !</center></font>");
+			rd.include(request, response);
 		} else {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -72,10 +73,16 @@ public class AddUser extends HttpServlet {
 				ps.setInt(5, Integer.parseInt(lvlSecu));
 				int result = ps.executeUpdate();
 				if ((result > 0)) {
-					out.println("<h3><center>Employe ajoute a la base de donnees avec succes !</center></h3>");
+					out.println("<h3><center>Employe ajoute a la base de donnees avec succes !</center></h3><br />");
+					out.println("<h3><center>Recapitulatif :</center></h3>");
+					out.println("<h4><center>ID de la carte : " + idCarte + "</center></h4>");
+					out.println("<h4><center>Nom : " + nom + "</center></h4>");
+					out.println("<h4><center>Prenom : " + prenom + "</center></h4>");
+					out.println("<h4><center>Poste : " + poste + "</center></h4>");
+					out.println("<h4><center>Niveau de securite : " + lvlSecu + "</center></h4>");
 				} else {
 					out.println(
-							"<h3><center>Erreur, impossible d'ajouter l'employe a la base de donnees...</center></h3>");
+							"<h3><font color=red><center>Erreur, impossible d'ajouter l'employe a la base de donnees...</center></font></h3>");
 				}
 			} catch (SQLException se) {
 				se.printStackTrace();
