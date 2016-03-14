@@ -1,8 +1,4 @@
-/myServlet/
-/userServlet/
-/adminServlet/
 /servletAdmin/
-/servletUser/
-/servetFilter/
 /servletFilter/
 /servletSession/
+/servletUser/

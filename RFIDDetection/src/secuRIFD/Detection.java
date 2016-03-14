@@ -9,50 +9,64 @@ public class Detection {
 	private ScanUID myScanUID = new ScanUID();
 	private int id = 0;
 
-	public Detection(int id) {
+	public Detection(int id) throws IOException {
 		this.id = id;
 	}
 
 	public void run() throws IOException {
 
+		String mainUrl = "http://localhost:50001/webProject/RFIDAuthorization";
+		JEditorPane mainWebsite = new JEditorPane(mainUrl);
+		JFrame mainFrame = new JFrame("Browser RFID Detection");
+		mainFrame.setSize(600, 300);
+		mainFrame.setResizable(false);
+		JScrollPane jScrollPane = new JScrollPane(mainWebsite);
+		mainFrame.add(jScrollPane);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setVisible(true);
+
 		String UID = "";
 		String terminalID = "";
 
-		if (myScanUID.isCardHere()) {
-			myScanUID.openConnection(id);
-			try {
-				UID = myScanUID.getUidCard();
-				terminalID = myScanUID.getTerminalID(id);
-				myScanUID.getATRcard();
+		while (true) {
+			if (myScanUID.isCardHere()) {
+				mainFrame.setVisible(false);
+				myScanUID.openConnection(id);
+				try {
+					UID = myScanUID.getUidCard();
+					terminalID = myScanUID.getTerminalID(id);
 
-				String url = "http://localhost:50001/webProject/RFIDAuthorization?idCard=" + UID + "&idTerminal="
-						+ URLEncoder.encode(terminalID, "UTF-8");
-				JEditorPane website = new JEditorPane(url);
+					String cardUrl = "http://localhost:50001/webProject/RFIDAuthorization?idCard=" + UID + "&idTerminal="
+							+ URLEncoder.encode(terminalID, "UTF-8");
+					JEditorPane cardWebsite = new JEditorPane(cardUrl);
 
-				JFrame frame = new JFrame("Browser RFID Detection");
-				frame.setSize(600, 300);
-				frame.setResizable(false);
-				JScrollPane jScrollPane = new JScrollPane(website);
-				frame.add(jScrollPane);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setVisible(true);
+					JFrame cardFrame = new JFrame("Browser RFID Detection");
+					cardFrame.setSize(600, 300);
+					cardFrame.setResizable(false);
+					JScrollPane jScrollPane1 = new JScrollPane(cardWebsite);
+					cardFrame.add(jScrollPane1);
+					cardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					cardFrame.setVisible(true);
+					try {
+						Thread.sleep(2500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					cardFrame.setVisible(false);
+					cardFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			} catch (CardException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				} catch (CardException e1) {
+					e1.printStackTrace();
+				}
+
+			} else {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				mainFrame.setVisible(true);
 			}
-
-		} else {
-			String url = "http://localhost:50001/webProject/RFIDAuthorization";
-			JEditorPane website = new JEditorPane(url);
-
-			JFrame frame = new JFrame("Browser RFID Detection");
-			frame.setSize(600, 300);
-			frame.setResizable(false);
-			JScrollPane jScrollPane = new JScrollPane(website);
-			frame.add(jScrollPane);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);
 		}
 	}
 }

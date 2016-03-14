@@ -9,34 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class RFIDAuthorization
- */
 @WebServlet("/RFIDAuthorization")
 public class RFIDAuthorization extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public RFIDAuthorization() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		handleRequest(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		handleRequest(request, response);
@@ -44,20 +29,21 @@ public class RFIDAuthorization extends HttpServlet {
 
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
-	
+
 		String paramIdCardValue = request.getParameter("idCard");
 		String paramIdTerminalValue = request.getParameter("idTerminal");
-		
+
 		PrintWriter out = response.getWriter();
-		
-		if(paramIdCardValue == null && paramIdTerminalValue == null){
-			out.println("<h3><center>Bonjour, veuillez passer votre carte devant le lecteur pour entrer...</center></h3>");	
-		}
-		else{
+
+		if (paramIdCardValue == null && paramIdTerminalValue == null) {
+			out.println(
+					"<h3><center>Bonjour, veuillez passer votre carte devant le lecteur pour entrer...</center></h3>");
+		} else {
 			paramIdTerminalValue = URLDecoder.decode(request.getParameter("idTerminal"), "UTF-8");
 			Db myDb = new Db();
-			out.println("<h3><center>" + myDb.identificationDb(paramIdCardValue, paramIdTerminalValue) + "</center></h3>");
+			out.println(
+					"<h3><center>" + myDb.identificationDb(paramIdCardValue, paramIdTerminalValue) + "</center></h3>");
 		}
-		out.close();	
+		out.close();
 	}
 }

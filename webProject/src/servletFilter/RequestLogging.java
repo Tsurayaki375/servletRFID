@@ -12,23 +12,15 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
  
-/**
- * Servlet Filter implementation class RequestLoggingFilter
- */
 @WebFilter("/RequestLogging")
 public class RequestLogging implements Filter {
  
     private ServletContext context;
     
-    /**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public RequestLogging() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
      
     public void init(FilterConfig fConfig) throws ServletException {
@@ -51,11 +43,9 @@ public class RequestLogging implements Filter {
                 this.context.log(req.getRemoteAddr() + "::Cookie::{"+cookie.getName()+","+cookie.getValue()+"}");
             }
         }
-        // pass the request along the filter chain
         chain.doFilter(request, response);
     }
  
     public void destroy() {
-        //we can close resources here
     }
 }

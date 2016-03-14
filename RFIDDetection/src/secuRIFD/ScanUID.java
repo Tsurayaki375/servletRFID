@@ -63,12 +63,11 @@ public class ScanUID {
 			channel = card.getBasicChannel();
 			result += "Channel:" + channel + "\n";
 		}
-		System.out.println(result);
 		return result;
 
 	}
 
-	public String getATRcard() throws CardException { // Obtenir l'ATR
+	public String getATRcard() throws CardException {
 		String result = "";
 		if (isCardHere()) {
 			result += "Connection open!\n";
@@ -79,25 +78,21 @@ public class ScanUID {
 				result += String.format("%02X", baAtr[i]);
 			}
 		}
-		System.out.println("ATR : " + result);
 		return result;
 	}
 
-	public String getUidCard() throws CardException { // Obtenir l'UID de la
-														// carte
+	public String getUidCard() throws CardException { 													
 		String result = "";
 		if (isCardHere()) {
 			byte[] cmdApduGetCardUid = new byte[] { (byte) 0xFF, (byte) 0xCA, (byte) 0x00, (byte) 0x00, (byte) 0x00 };
 			ResponseAPDU respApdu = channel.transmit(new CommandAPDU(cmdApduGetCardUid));
 			if (respApdu.getSW1() == 0x90 && respApdu.getSW2() == 0x00) {
 				byte[] baCardUid = respApdu.getData();
-				// result += "Card UID = 0x";
 				for (int i = 0; i < baCardUid.length; i++) {
 					result += String.format("%02X", baCardUid[i]) /* + " " */;
 				}
 			}
 		}
-		System.out.println("UID : " + result);
 		return result;
 	}
 }

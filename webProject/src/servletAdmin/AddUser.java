@@ -14,25 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class AddUser
- */
 @WebServlet("/admin/AddUser")
 public class AddUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public AddUser() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	public boolean isInteger(String str) {
 		return str.matches("[0-9]");
 	}
@@ -57,7 +46,6 @@ public class AddUser extends HttpServlet {
 		out.println(docType + "<html>\n" + "<head><title>" + title + "</title></head>\n"
 				+ "<body bgcolor=\"#f0f0f0\">\n" + "<h2 align=\"center\">" + title + "</h2>\n");
 
-		// read form fields
 		String idCarte = request.getParameter("idCarte");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");

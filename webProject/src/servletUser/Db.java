@@ -25,7 +25,6 @@ public class Db {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(url, user, pass);
-			System.out.println("Connection opened\n");
 			statement = con.createStatement();
 			resultatTotal = statement
 					.executeQuery("SELECT e_Nom, e_Prenom, e_Poste, e_LvlSecu, p_LvlSecu " + "FROM employe, porte "
@@ -45,22 +44,15 @@ public class Db {
 			} else {
 				result = "CARTE NON RECONNUE";
 			}
-			System.out.println(result);
 		} catch (SQLException e) {
 		} finally {
 			if (con != null)
 				try {
-					/* Fermeture de la connexion */
 					con.close();
 					statement.close();
-					System.out.println("\nConnection closed");
 				} catch (SQLException ignore) {
-					/* ignorer les erreurs a la fermeture */
 				}
 		}
 		return result;
 	}
 }
-
-
-
