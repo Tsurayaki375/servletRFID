@@ -19,6 +19,7 @@ public class Detection {
 		JEditorPane mainWebsite = new JEditorPane(mainUrl);
 		JFrame mainFrame = new JFrame("Browser RFID Detection");
 		mainFrame.setSize(600, 300);
+		mainFrame.setLocationRelativeTo(null);  
 		mainFrame.setResizable(false);
 		JScrollPane jScrollPane = new JScrollPane(mainWebsite);
 		mainFrame.add(jScrollPane);
@@ -42,6 +43,7 @@ public class Detection {
 
 					JFrame cardFrame = new JFrame("Browser RFID Detection");
 					cardFrame.setSize(600, 300);
+					cardFrame.setLocationRelativeTo(null);
 					cardFrame.setResizable(false);
 					JScrollPane jScrollPane1 = new JScrollPane(cardWebsite);
 					cardFrame.add(jScrollPane1);
