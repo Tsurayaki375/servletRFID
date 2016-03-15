@@ -42,6 +42,10 @@ html {
 		<a href="admin/ShowUsers" target="_blank">Voir les utilisateurs</a>
 	</p>
 	<p>
+		<a href="admin/ShowPassages" target="_blank">Voir
+			l'historique des passages</a>
+	</p>
+	<p>
 		<a href="admin/ShowGates" target="_blank">Voir les portes</a>
 	</p>
 	<p>

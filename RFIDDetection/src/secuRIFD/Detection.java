@@ -48,6 +48,8 @@ public class Detection {
 					JScrollPane jScrollPane1 = new JScrollPane(cardWebsite);
 					cardFrame.add(jScrollPane1);
 					cardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					sendUserPassage mySend = new sendUserPassage();
+					mySend.run(UID);
 					cardFrame.setVisible(true);
 					try {
 						Thread.sleep(2500);

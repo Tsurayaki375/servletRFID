@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 08 Mars 2016 à 15:38
+-- Généré le :  Mar 15 Mars 2016 à 14:52
 -- Version du serveur :  5.6.20-log
 -- Version de PHP :  5.5.15
 
@@ -34,17 +34,38 @@ CREATE TABLE IF NOT EXISTS `employe` (
   `e_Prenom` varchar(25) NOT NULL,
   `e_Poste` varchar(50) NOT NULL,
   `e_LvlSecu` int(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `employe`
 --
 
 INSERT INTO `employe` (`e_ID`, `e_Nom`, `e_Prenom`, `e_Poste`, `e_LvlSecu`) VALUES
-('9B449616', 'Sutre', 'Frederic', 'Chef de la securité', 4),
+('04D00BB27A4880', 'Valade', 'Eric', 'Psychologue du Travail', 3),
+('04E70E7A7A4884', 'Massabiau', 'Bernard', 'Concierge', 1),
 ('0BE19516', 'Obassa', 'Andrew', 'Consultant', 2),
-('04D00BB27A4880', 'Eric', 'Valade', 'Psychologue du Travail', 3),
-('04E70E7A7A4884', 'Massabiau', 'Bernard', 'Concierge', 1);
+('9B449616', 'Sutre', 'Frederic', 'Chef de la securité', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `historique`
+--
+
+CREATE TABLE IF NOT EXISTS `historique` (
+  `h_ID` varchar(50) NOT NULL,
+  `h_Date` varchar(30) NOT NULL,
+  `h_Nom` varchar(25) NOT NULL,
+  `h_Prenom` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `historique`
+--
+
+INSERT INTO `historique` (`h_ID`, `h_Date`, `h_Nom`, `h_Prenom`) VALUES
+('0BE19516', '2016/03/15 15:50:24', 'Obassa', 'Andrew'),
+('0BE19516', '2016/03/15 15:50:43', 'Obassa', 'Andrew');
 
 -- --------------------------------------------------------
 
@@ -55,7 +76,7 @@ INSERT INTO `employe` (`e_ID`, `e_Nom`, `e_Prenom`, `e_Poste`, `e_LvlSecu`) VALU
 CREATE TABLE IF NOT EXISTS `porte` (
   `p_Terminal` varchar(50) NOT NULL,
   `p_LvlSecu` int(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `porte`
@@ -75,10 +96,26 @@ ALTER TABLE `employe`
  ADD PRIMARY KEY (`e_ID`);
 
 --
+-- Index pour la table `historique`
+--
+ALTER TABLE `historique`
+ ADD PRIMARY KEY (`h_ID`,`h_Date`);
+
+--
 -- Index pour la table `porte`
 --
 ALTER TABLE `porte`
  ADD PRIMARY KEY (`p_Terminal`);
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `historique`
+--
+ALTER TABLE `historique`
+ADD CONSTRAINT `historique_ibfk_1` FOREIGN KEY (`h_ID`) REFERENCES `employe` (`e_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
