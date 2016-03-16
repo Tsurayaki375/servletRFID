@@ -13,18 +13,21 @@ public class Detection {
 		this.id = id;
 	}
 
-	public void run() throws IOException {
+	public JFrame doBrowserFrame(String url) throws IOException {
+		JEditorPane website = new JEditorPane(url);
+		JFrame frame = new JFrame("Browser RFID Detection");
+		frame.setSize(600, 300);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		JScrollPane jScrollPane = new JScrollPane(website);
+		frame.add(jScrollPane);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		return frame;
+	}
 
-		String mainUrl = "http://localhost:50001/webProject/RFIDAuthorization";
-		JEditorPane mainWebsite = new JEditorPane(mainUrl);
-		JFrame mainFrame = new JFrame("Browser RFID Detection");
-		mainFrame.setSize(600, 300);
-		mainFrame.setLocationRelativeTo(null);  
-		mainFrame.setResizable(false);
-		JScrollPane jScrollPane = new JScrollPane(mainWebsite);
-		mainFrame.add(jScrollPane);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setVisible(true);
+	public void run() throws IOException {
+		JFrame mainFrame = doBrowserFrame("http://localhost:50001/webProject/RFIDAuthorization");
 
 		String UID = "";
 		String terminalID = "";
@@ -37,22 +40,10 @@ public class Detection {
 					UID = myScanUID.getUidCard();
 					terminalID = myScanUID.getTerminalID(id);
 
-					String cardUrl = "http://localhost:50001/webProject/RFIDAuthorization?idCard=" + UID + "&idTerminal="
-							+ URLEncoder.encode(terminalID, "UTF-8");
-					JEditorPane cardWebsite = new JEditorPane(cardUrl);
-
-					JFrame cardFrame = new JFrame("Browser RFID Detection");
-					cardFrame.setSize(600, 300);
-					cardFrame.setLocationRelativeTo(null);
-					cardFrame.setResizable(false);
-					JScrollPane jScrollPane1 = new JScrollPane(cardWebsite);
-					cardFrame.add(jScrollPane1);
-					cardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					sendUserPassage mySend = new sendUserPassage();
-					mySend.run(UID);
-					cardFrame.setVisible(true);
+					JFrame cardFrame = doBrowserFrame("http://localhost:50001/webProject/RFIDAuthorization?idCard="
+							+ UID + "&idTerminal=" + URLEncoder.encode(terminalID, "UTF-8"));
 					try {
-						Thread.sleep(2500);
+						Thread.sleep(4000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

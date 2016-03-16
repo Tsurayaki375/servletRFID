@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,43 +16,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import constants.Constants;
 
-@WebServlet("/admin/AddUser")
-public class AddUser extends HttpServlet {
+@WebServlet("/admin/DeleteUser")
+public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AddUser() {
+	public DeleteUser() {
 		super();
-	}
-
-	public boolean isInteger(String str) {
-		return str.matches("[0-9]");
 	}
 
 	public boolean isCorrectLength(String str, int maxLength) {
 		return (str.length() <= maxLength && !str.isEmpty());
 	}
 
+	@SuppressWarnings("resource")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Connection con = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String nom = "";
+		String prenom = "";
+		String poste = "";
+		int lvlSecu = -1;
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String title = "Ajouter un employe";
+		String title = "Supprimer un employe";
 		String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
 		out.println(docType + "<html>\n" + "<head><title>" + title + "</title></head>\n"
 				+ "<body bgcolor=\"#f0f0f0\">\n" + "<h2 align=\"center\">" + title + "</h2>\n");
 
 		String idCarte = request.getParameter("idCarte");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		String poste = request.getParameter("poste");
-		String lvlSecu = request.getParameter("lvlSecu");
 
-		if (!isInteger(lvlSecu) || !isCorrectLength(idCarte, 50) || !isCorrectLength(nom, 25)
-				|| !isCorrectLength(prenom, 25) || !isCorrectLength(poste, 50)) {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/AddUser.html");
+		if (!isCorrectLength(idCarte, 50)) {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/DeleteUser.html");
 			out.println(
 					"<font color=red><center>Formulaire invalide, veuillez respecter les consignes !</center></font>");
 			rd.include(request, response);
@@ -60,17 +58,25 @@ public class AddUser extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				con = DriverManager.getConnection(Constants.DB_URL, Constants.USER, Constants.PASS);
 
-				String sql = "INSERT INTO employe (e_ID, e_Nom, e_Prenom, e_Poste, e_LvlSecu) VALUES (?, ?, ?, ?, ?)";
+				String sql1 = "SELECT e_Nom, e_Prenom, e_Poste, e_lvlSecu FROM employe WHERE e_ID = ?";
+				String sql2 = "DELETE FROM employe WHERE e_ID = ?";
 
-				ps = con.prepareStatement(sql);
+				ps = con.prepareStatement(sql1);
 				ps.setString(1, idCarte);
-				ps.setString(2, nom);
-				ps.setString(3, prenom);
-				ps.setString(4, poste);
-				ps.setInt(5, Integer.parseInt(lvlSecu));
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					nom = rs.getString("e_Nom");
+					prenom = rs.getString("e_Prenom");
+					poste = rs.getString("e_Poste");
+					lvlSecu = rs.getInt("e_lvlSecu");
+				}
+
+				ps = con.prepareStatement(sql2);
+				ps.setString(1, idCarte);
 				int result = ps.executeUpdate();
 				if ((result > 0)) {
-					out.println("<h3><center>Employe ajoute a la base de donnees avec succes !</center></h3><br />");
+					out.println(
+							"<h3><center>Employe supprimer de la base de donnees avec succes !</center></h3><br />");
 					out.println("<h3><center>Recapitulatif :</center></h3>");
 					out.println("<h4><center>ID de la carte : " + idCarte + "</center></h4>");
 					out.println("<h4><center>Nom : " + nom + "</center></h4>");
@@ -79,7 +85,7 @@ public class AddUser extends HttpServlet {
 					out.println("<h4><center>Niveau de securite : " + lvlSecu + "</center></h4>");
 				} else {
 					out.println(
-							"<h3><font color=red><center>Erreur, impossible d'ajouter l'employe a la base de donnees...</center></font></h3>");
+							"<h3><font color=red><center>Erreur, impossible de supprimer l'employe a la base de donnees...</center></font></h3>");
 				}
 			} catch (SQLException se) {
 				se.printStackTrace();

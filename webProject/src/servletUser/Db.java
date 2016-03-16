@@ -6,11 +6,9 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.Statement;
 
-public class Db {
-	private final String url = "jdbc:mysql://localhost/securfid";
-	private final String user = "root";
-	private final String pass = "root";
+import constants.Constants;
 
+public class Db {
 	public String identificationDb(String UID, String terminalID) {
 		String nom = "", prenom = "", poste = "", result = "";
 		Connection con = null;
@@ -24,7 +22,7 @@ public class Db {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			con = DriverManager.getConnection(url, user, pass);
+			con = DriverManager.getConnection(Constants.DB_URL, Constants.USER, Constants.PASS);
 			statement = con.createStatement();
 			resultatTotal = statement
 					.executeQuery("SELECT e_Nom, e_Prenom, e_Poste, e_LvlSecu, p_LvlSecu " + "FROM employe, porte "

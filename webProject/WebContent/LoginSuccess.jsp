@@ -31,26 +31,32 @@ html {
 		Bonjour
 		<%=userName%>, identifiants correct ! Votre ID de session est :<%=sessionID%></h3>
 	User=<%=user%>
-	<p>
+
 	<form action="Logout" method="post">
-		<input type="submit" value="Logout">
+		<p>
+			<input type="submit" value="Logout">
+		</p>
 	</form>
-	</p>
+
 
 	<h4>Liste des services admin :</h4>
 	<p>
-		<a href="admin/ShowUsers" target="_blank">Voir les utilisateurs</a>
+		<a href="admin/ShowUsers" target="_blank">Voir les employes</a>
 	</p>
 	<p>
-		<a href="admin/ShowPassages" target="_blank">Voir
-			l'historique des passages</a>
+		<a href="admin/ShowPassages" target="_blank">Voir l'historique des
+			passages</a>
 	</p>
 	<p>
 		<a href="admin/ShowGates" target="_blank">Voir les portes</a>
 	</p>
 	<p>
 		<a href="admin/AddUser.html" target="_blank">Ajouter un
-			utilisateur</a>
+			employe</a>
+	</p>
+		<p>
+		<a href="admin/DeleteUser.html" target="_blank">Supprimer un
+			employe</a>
 	</p>
 </body>
 </html>

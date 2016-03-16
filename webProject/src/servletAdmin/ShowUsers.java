@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import constants.Constants;
+
 @WebServlet("/admin/ShowUsers")
 public class ShowUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,57 +25,24 @@ public class ShowUsers extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		final String DB_URL = "jdbc:mysql://localhost/securfid";
-		final String USER = "root";
-		final String PASS = "root";
 		Connection conn = null;
 		Statement stmt = null;
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		String title = "Employes Database";
-		String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
-		out.println(docType + "<html>\n" + "<head><title>" + title + "</title></head>\n"
-				+ "<body bgcolor=\"#f0f0f0\">\n" + "<h2 align=\"center\">" + title + "</h2>\n");
-		
-		out.println("<style>");
-		out.println("td {");
-		out.println("text-align: center;");
-		out.println("vertical-align: middle;");	 
-		out.println("}");		 
-		out.println("</style>");
+		PrintWriter out = Constants.HeaderShow(response, "Employes Database");
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			conn = DriverManager.getConnection(Constants.DB_URL, Constants.USER, Constants.PASS);
 
 			stmt = conn.createStatement();
-			String sql;
-			sql = "SELECT e_ID, e_Nom, e_Prenom, e_Poste, e_LvlSecu  FROM employe";
+			String sql = "SELECT e_ID, e_Nom, e_Prenom, e_Poste, e_LvlSecu  FROM employe";
 			ResultSet rs = stmt.executeQuery(sql);
 
-			out.println("<table border=1 cellpadding=0 cellspacing=3 align=center>");
+			String[] colsTitles = { "ID de la carte :", "Nom :", "Prenom :", "Poste :", "Niveau de securite :" };
+			String[] formFields = { "e_ID", "e_Nom", "e_Prenom", "e_Poste", "e_lvlSecu" };
 
-			out.println("<tr>");
-			out.println("<td> ID :</td>");
-			out.println("<td> Nom :</td>");
-			out.println("<td> Prenom :</td>");
-			out.println("<td> Poste :</td>");
-			out.println("<td> Niveau de securite :</td>");
-			out.println("</tr>");
-
-			while (rs.next()) {
-				out.println("<tr>");
-				out.println("<td>" + rs.getString("e_ID") + "</td>");
-				out.println("<td>" + rs.getString("e_Nom") + "</td>");
-				out.println("<td>" + rs.getString("e_Prenom") + "</td>");
-				out.println("<td>" + rs.getString("e_Poste") + "</td>");
-				out.println("<td>" + rs.getInt("e_LvlSecu") + "</td>");
-				out.println("</tr>");
-			}
-			out.println("</table>");
-			out.println("</body></html>");
+			Constants.CreateShowTable(rs, out, sql, colsTitles, formFields);
 
 			rs.close();
 			stmt.close();
@@ -83,17 +52,7 @@ public class ShowUsers extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException se2) {
-			}
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
+			Constants.JDBCEnd(conn, stmt);
 		}
 	}
 }
