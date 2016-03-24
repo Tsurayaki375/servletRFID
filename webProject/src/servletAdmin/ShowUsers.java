@@ -28,7 +28,7 @@ public class ShowUsers extends HttpServlet {
 		Connection conn = null;
 		Statement stmt = null;
 
-		PrintWriter out = Constants.HeaderShow(response, "Employes Database");
+		PrintWriter out = Constants.HeaderShow(response, "Employes Database", true);
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

@@ -28,7 +28,7 @@ public class ShowGates extends HttpServlet {
 		Connection conn = null;
 		Statement stmt = null;
 
-		PrintWriter out = Constants.HeaderShow(response, "Portes Database");
+		PrintWriter out = Constants.HeaderShow(response, "Portes Database", true);
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

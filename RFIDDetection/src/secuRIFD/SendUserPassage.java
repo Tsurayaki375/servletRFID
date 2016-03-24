@@ -9,7 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class sendUserPassage {
+public class SendUserPassage {
 	@SuppressWarnings("resource")
 	public void run(String UID) {
 		final String url = "jdbc:mysql://localhost/securfid";

@@ -14,19 +14,21 @@ public final class Constants {
 	public static String USER = "root";
 	public static String PASS = "root";
 
-	public static PrintWriter HeaderShow(HttpServletResponse response, String title) throws IOException {
+	public static PrintWriter HeaderShow(HttpServletResponse response, String title, boolean show) throws IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
 		out.println(docType + "<html>\n" + "<head><title>" + title + "</title></head>\n"
 				+ "<body bgcolor=\"#f0f0f0\">\n" + "<h2 align=\"center\">" + title + "</h2>\n");
 
-		out.println("<style>");
-		out.println("td {");
-		out.println("text-align: center;");
-		out.println("vertical-align: middle;");
-		out.println("}");
-		out.println("</style>");
+		if (show) {
+			out.println("<style>");
+			out.println("td {");
+			out.println("text-align: center;");
+			out.println("vertical-align: middle;");
+			out.println("}");
+			out.println("</style>");
+		}
 		return out;
 	}
 

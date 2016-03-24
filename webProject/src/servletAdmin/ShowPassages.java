@@ -28,7 +28,7 @@ public class ShowPassages extends HttpServlet {
 		Connection conn = null;
 		Statement stmt = null;
 
-		PrintWriter out = Constants.HeaderShow(response, "Historique Database");
+		PrintWriter out = Constants.HeaderShow(response, "Historique Database", true);
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

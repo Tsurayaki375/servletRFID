@@ -36,12 +36,7 @@ public class AddUser extends HttpServlet {
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		String title = "Ajouter un employe";
-		String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
-		out.println(docType + "<html>\n" + "<head><title>" + title + "</title></head>\n"
-				+ "<body bgcolor=\"#f0f0f0\">\n" + "<h2 align=\"center\">" + title + "</h2>\n");
+		PrintWriter out = Constants.HeaderShow(response, "Portes Database", false);
 
 		String idCarte = request.getParameter("idCarte");
 		String nom = request.getParameter("nom");

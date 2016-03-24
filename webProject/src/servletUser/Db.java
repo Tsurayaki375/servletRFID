@@ -33,14 +33,14 @@ public class Db {
 				poste = resultatTotal.getString("e_Poste");
 				secuEmploye = resultatTotal.getInt("e_LvlSecu");
 				secuPorte = resultatTotal.getInt("p_LvlSecu");
-				result = nom + " " + prenom + "\n" + poste + "\nLv." + secuEmploye + "\n\n";
+				result = nom + " " + prenom + "\n" + poste + "\nLvl." + secuEmploye + "\n\n";
 				if (secuEmploye >= secuPorte) {
 					result += "ACCES AUTORISE";
 				} else {
 					result += "ACCES REFUSE NIVEAU DE SECURITE INSUFFISANT";
 				}
 			} else {
-				result = "CARTE NON RECONNUE";
+				result = "ERREUR : CARTE NON RECONNUE";
 			}
 		} catch (SQLException e) {
 		} finally {

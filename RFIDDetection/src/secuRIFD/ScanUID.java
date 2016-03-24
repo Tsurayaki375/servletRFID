@@ -89,7 +89,7 @@ public class ScanUID {
 			if (respApdu.getSW1() == 0x90 && respApdu.getSW2() == 0x00) {
 				byte[] baCardUid = respApdu.getData();
 				for (int i = 0; i < baCardUid.length; i++) {
-					result += String.format("%02X", baCardUid[i]) /* + " " */;
+					result += String.format("%02X", baCardUid[i]);
 				}
 			}
 		}

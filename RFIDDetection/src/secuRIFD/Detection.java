@@ -28,18 +28,18 @@ public class Detection {
 
 	public void run() throws IOException {
 		JFrame mainFrame = doBrowserFrame("http://localhost:50001/webProject/RFIDAuthorization");
+		SendUserPassage sendUserPassage = new SendUserPassage();
 
 		String UID = "";
 		String terminalID = "";
 
 		while (true) {
 			if (myScanUID.isCardHere()) {
-				mainFrame.setVisible(false);
 				myScanUID.openConnection(id);
 				try {
 					UID = myScanUID.getUidCard();
 					terminalID = myScanUID.getTerminalID(id);
-
+					mainFrame.setVisible(false);
 					JFrame cardFrame = doBrowserFrame("http://localhost:50001/webProject/RFIDAuthorization?idCard="
 							+ UID + "&idTerminal=" + URLEncoder.encode(terminalID, "UTF-8"));
 					try {
@@ -47,6 +47,7 @@ public class Detection {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					sendUserPassage.run(UID);
 					cardFrame.setVisible(false);
 					cardFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -56,7 +57,7 @@ public class Detection {
 
 			} else {
 				try {
-					Thread.sleep(500);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
