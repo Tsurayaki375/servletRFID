@@ -36,7 +36,7 @@ public class ShowUsers extends HttpServlet {
 			conn = DriverManager.getConnection(Constants.DB_URL, Constants.USER, Constants.PASS);
 
 			stmt = conn.createStatement();
-			String sql = "SELECT e_ID, e_Nom, e_Prenom, e_Poste, e_LvlSecu  FROM employe";
+			String sql = "SELECT * FROM employe";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			String[] colsTitles = { "ID de la carte :", "Nom :", "Prenom :", "Poste :", "Niveau de securite :" };

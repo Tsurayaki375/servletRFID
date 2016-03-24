@@ -36,7 +36,7 @@ public class ShowGates extends HttpServlet {
 			conn = DriverManager.getConnection(Constants.DB_URL, Constants.USER, Constants.PASS);
 
 			stmt = conn.createStatement();
-			String sql = "SELECT p_Terminal, p_LvlSecu FROM porte";
+			String sql = "SELECT * FROM porte";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			String[] colsTitles = { "ID Terminal :", "Niveau de securite :" };

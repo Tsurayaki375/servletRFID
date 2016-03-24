@@ -10,8 +10,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SendUserPassage {
+	public String calculStatut(int lvlSecuEmp, int lvlSecuPorte) {
+		if (lvlSecuEmp >= lvlSecuPorte)
+			return "autorise";
+		else
+			return "non autorise";
+	}
+
 	@SuppressWarnings("resource")
-	public void run(String UID) {
+	public void run(String UID, String terminalID) {
 		final String url = "jdbc:mysql://localhost/securfid";
 		final String user = "root";
 		final String pass = "root";
@@ -20,6 +27,8 @@ public class SendUserPassage {
 		ResultSet rs = null;
 		String nom = "";
 		String prenom = "";
+		int lvlSecuEmp = 0;
+		int lvlSecuPorte = 0;
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -29,8 +38,9 @@ public class SendUserPassage {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, user, pass);
 
-			String sql1 = "SELECT e_Nom, e_Prenom FROM employe WHERE e_ID = ?";
-			String sql2 = "INSERT INTO historique (h_ID, h_Date, h_Nom, h_Prenom) VALUES (?, ?, ?, ?)";
+			String sql1 = "SELECT e_Nom, e_Prenom, e_LvlSecu FROM employe WHERE e_ID = ?";
+			String sql2 = "SELECT p_lvlSecu FROM porte WHERE p_Terminal = ?";
+			String sql3 = "INSERT INTO historique (h_ID, h_Terminal, h_Date, h_Statut, h_Nom, h_Prenom) VALUES (?, ?, ?, ?, ?, ?)";
 
 			ps = con.prepareStatement(sql1);
 			ps.setString(1, UID);
@@ -38,13 +48,25 @@ public class SendUserPassage {
 			if (rs.next()) {
 				nom = rs.getString("e_Nom");
 				prenom = rs.getString("e_Prenom");
+				lvlSecuEmp = rs.getInt("e_lvlSecu");
 			}
 
 			ps = con.prepareStatement(sql2);
+			ps.setString(1, terminalID);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				lvlSecuPorte = rs.getInt("p_lvlSecu");
+			}
+			
+			String statut = calculStatut(lvlSecuEmp, lvlSecuPorte);
+
+			ps = con.prepareStatement(sql3);
 			ps.setString(1, UID);
-			ps.setString(2, currentDate);
-			ps.setString(3, nom);
-			ps.setString(4, prenom);
+			ps.setString(2, terminalID);
+			ps.setString(3, currentDate);
+			ps.setString(4, statut);
+			ps.setString(5, nom);
+			ps.setString(6, prenom);
 			ps.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();

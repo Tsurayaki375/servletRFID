@@ -47,7 +47,7 @@ public class Detection {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					sendUserPassage.run(UID);
+					sendUserPassage.run(UID, terminalID);
 					cardFrame.setVisible(false);
 					cardFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

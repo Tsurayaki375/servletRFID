@@ -36,11 +36,11 @@ public class ShowPassages extends HttpServlet {
 			conn = DriverManager.getConnection(Constants.DB_URL, Constants.USER, Constants.PASS);
 
 			stmt = conn.createStatement();
-			String sql = "SELECT h_ID, h_Date, h_Nom, h_Prenom FROM historique ORDER BY h_Date ASC";
+			String sql = "SELECT * FROM historique ORDER BY h_Date ASC";
 			ResultSet rs = stmt.executeQuery(sql);
 
-			String[] colsTitles = { "ID de la carte :", "Date de passage :", "Nom :", "Prenom :" };
-			String[] formFields = { "h_ID", "h_Date", "h_Nom", "h_Prenom" };
+			String[] colsTitles = { "ID de la carte :", "ID du terminal :", "Date de passage :", "Statut :", "Nom :", "Prenom :" };
+			String[] formFields = { "h_ID", "h_Terminal", "h_Date", "h_Statut", "h_Nom", "h_Prenom" };
 
 			Constants.CreateShowTable(rs, out, sql, colsTitles, formFields);
 

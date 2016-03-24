@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 15 Mars 2016 à 14:52
+-- Généré le :  Jeu 24 Mars 2016 à 20:22
 -- Version du serveur :  5.6.20-log
 -- Version de PHP :  5.5.15
 
@@ -54,20 +54,12 @@ INSERT INTO `employe` (`e_ID`, `e_Nom`, `e_Prenom`, `e_Poste`, `e_LvlSecu`) VALU
 
 CREATE TABLE IF NOT EXISTS `historique` (
   `h_ID` varchar(50) NOT NULL,
+  `h_Terminal` varchar(50) NOT NULL,
   `h_Date` varchar(30) NOT NULL,
+  `h_Statut` enum('autorise','non autorise') NOT NULL,
   `h_Nom` varchar(25) NOT NULL,
   `h_Prenom` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `historique`
---
-
-INSERT INTO `historique` (`h_ID`, `h_Date`, `h_Nom`, `h_Prenom`) VALUES
-('0BE19516', '2016/03/15 15:50:24', 'Obassa', 'Andrew'),
-('0BE19516', '2016/03/15 15:50:43', 'Obassa', 'Andrew');
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `porte`
@@ -99,7 +91,7 @@ ALTER TABLE `employe`
 -- Index pour la table `historique`
 --
 ALTER TABLE `historique`
- ADD PRIMARY KEY (`h_ID`,`h_Date`);
+ ADD PRIMARY KEY (`h_ID`,`h_Terminal`,`h_Date`), ADD KEY `historique_Terminal` (`h_Terminal`);
 
 --
 -- Index pour la table `porte`
@@ -115,7 +107,8 @@ ALTER TABLE `porte`
 -- Contraintes pour la table `historique`
 --
 ALTER TABLE `historique`
-ADD CONSTRAINT `historique_ibfk_1` FOREIGN KEY (`h_ID`) REFERENCES `employe` (`e_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `historique_ID` FOREIGN KEY (`h_ID`) REFERENCES `employe` (`e_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `historique_Terminal` FOREIGN KEY (`h_Terminal`) REFERENCES `porte` (`p_Terminal`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
