@@ -91,11 +91,6 @@ public class ModifyUser extends HttpServlet {
 				ps = con.prepareStatement(sql1);
 				int nb = setFields(ps, args);
 				ps.setString(nb, idCarte);
-				/*
-				 * ps.setString(1, idCarte); ps.setString(2, nom);
-				 * ps.setString(3, prenom); ps.setString(4, poste); ps.setInt(5,
-				 * Integer.parseInt(lvlSecu));
-				 */
 				int result = ps.executeUpdate();
 				if ((result > 0)) {
 					out.println(
