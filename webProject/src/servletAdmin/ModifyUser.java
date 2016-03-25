@@ -29,8 +29,8 @@ public class ModifyUser extends HttpServlet {
 		return str.matches("[0-9]");
 	}
 
-	public boolean isCorrectLength(String str, int maxLength) {
-		return (str.length() <= maxLength);
+	public boolean isCorrectString(String str, int maxLength) {
+		return (str.length() <= maxLength && str.matches("^[a-zA-Z0-9_]*$"));
 	}
 
 	public String createQueryUpdate(String[] args) {
@@ -75,8 +75,8 @@ public class ModifyUser extends HttpServlet {
 		String poste = request.getParameter("poste");
 		String lvlSecu = request.getParameter("lvlSecu");
 
-		if (!lvlSecu.isEmpty() && !isInteger(lvlSecu) || idCarte.isEmpty() || !isCorrectLength(idCarte, 50)
-				|| !isCorrectLength(nom, 25) || !isCorrectLength(prenom, 25) || !isCorrectLength(poste, 50)
+		if (!lvlSecu.isEmpty() && !isInteger(lvlSecu) || idCarte.isEmpty() || !isCorrectString(idCarte, 50)
+				|| !isCorrectString(nom, 25) || !isCorrectString(prenom, 25) || !isCorrectString(poste, 50)
 				|| nom.isEmpty() && prenom.isEmpty() && poste.isEmpty() && lvlSecu.isEmpty()) {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/ModifyUser.html");
 			out.println(

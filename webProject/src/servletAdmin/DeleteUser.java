@@ -24,8 +24,8 @@ public class DeleteUser extends HttpServlet {
 		super();
 	}
 
-	public boolean isCorrectLength(String str, int maxLength) {
-		return (str.length() <= maxLength && !str.isEmpty());
+	public boolean isCorrectString(String str, int maxLength) {
+		return (str.length() <= maxLength && !str.isEmpty() && str.matches("^[a-zA-Z0-9_]*$"));
 	}
 
 	@SuppressWarnings("resource")
@@ -43,7 +43,7 @@ public class DeleteUser extends HttpServlet {
 
 		String idCarte = request.getParameter("idCarte");
 
-		if (!isCorrectLength(idCarte, 50)) {
+		if (!isCorrectString(idCarte, 50)) {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/DeleteUser.html");
 			out.println(
 					"<font color=red><center>Formulaire invalide, veuillez respecter les consignes !</center></font>");
