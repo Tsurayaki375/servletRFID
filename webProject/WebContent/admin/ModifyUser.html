@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Modifier Employe</title>
+<style>
+html{
+	text-align: center;
+}	 
+</style>
+</head>
+<body>
+	<h3>Veuillez saisir l'ID de la carte ainsi que les nouvelles informations sur l'employe</h3>
+	<br />
+	<p>
+		<a href="ShowUsers" target="_blank">Voir les employes</a>
+	</p>
+	<br />
+	<form action="ModifyUser" method="post">
+		ID de la carte (Obligatoire, 50 caracteres max): <input type="text" name="idCarte" size="30"/> <br/>
+		<br>
+		<br />
+		Nouveau nom (Facultatif, 25 caracteres max) : <input type="text" name="nom" size="30"/> <br/>
+		<br>
+		<br />
+		Nouveau prenom (Facultatif, 25 caracteres max): <input type="text" name="prenom" size="30"/> <br/>
+		<br>
+		<br />
+		Nouveau poste (Facultatif, 50 caracteres max): <input type="text" name="poste" size="50"/> <br/>
+		<br>
+		<br />
+		Nouveau niveau de securite (Facultatif, Compris entre 0 et 9): <input type="text" name="lvlSecu" size="5"/> <br/>
+		<br>
+		<br />
+		<input type="submit" value="Confirmer" />
+	</form>
+</body>
+</html>

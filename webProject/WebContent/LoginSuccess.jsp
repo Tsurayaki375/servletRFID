@@ -51,10 +51,13 @@ html {
 		<a href="admin/ShowGates" target="_blank">Voir les portes</a>
 	</p>
 	<p>
-		<a href="admin/AddUser.html" target="_blank">Ajouter un
+		<a href="admin/AddUser.html" target="_blank">Ajouter un employe</a>
+	</p>
+	<p>
+		<a href="admin/ModifyUser.html" target="_blank">Modifier un
 			employe</a>
 	</p>
-		<p>
+	<p>
 		<a href="admin/DeleteUser.html" target="_blank">Supprimer un
 			employe</a>
 	</p>

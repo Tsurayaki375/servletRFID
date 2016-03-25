@@ -39,7 +39,7 @@ public class DeleteUser extends HttpServlet {
 		String poste = "";
 		int lvlSecu = -1;
 
-		PrintWriter out = Constants.HeaderShow(response, "Portes Database", false);
+		PrintWriter out = Constants.HeaderShow(response, "Supprimer Employe", false);
 
 		String idCarte = request.getParameter("idCarte");
 
@@ -80,7 +80,7 @@ public class DeleteUser extends HttpServlet {
 					out.println("<h4><center>Niveau de securite : " + lvlSecu + "</center></h4>");
 				} else {
 					out.println(
-							"<h3><font color=red><center>Erreur, impossible de supprimer l'employe a la base de donnees...</center></font></h3>");
+							"<h3><font color=red><center>Erreur, impossible de supprimer l'employe a la base de donnees...<br />L'ID de la carte est-il correct?</center></font></h3>");
 				}
 			} catch (SQLException se) {
 				se.printStackTrace();

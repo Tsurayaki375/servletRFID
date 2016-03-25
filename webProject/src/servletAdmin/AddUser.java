@@ -36,7 +36,7 @@ public class AddUser extends HttpServlet {
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		PrintWriter out = Constants.HeaderShow(response, "Portes Database", false);
+		PrintWriter out = Constants.HeaderShow(response, "Ajouter Employe", false);
 
 		String idCarte = request.getParameter("idCarte");
 		String nom = request.getParameter("nom");
@@ -74,7 +74,7 @@ public class AddUser extends HttpServlet {
 					out.println("<h4><center>Niveau de securite : " + lvlSecu + "</center></h4>");
 				} else {
 					out.println(
-							"<h3><font color=red><center>Erreur, impossible d'ajouter l'employe a la base de donnees...</center></font></h3>");
+							"<h3><font color=red><center>Erreur, impossible d'ajouter l'employe a la base de donnees...<br />L'ID de la carte existe t-il deja?</center></font></h3>");
 				}
 			} catch (SQLException se) {
 				se.printStackTrace();
