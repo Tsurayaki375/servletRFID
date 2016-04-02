@@ -38,7 +38,7 @@ public class RFIDAuthorization extends HttpServlet {
 
 		if (paramIdCardValue == null && paramIdTerminalValue == null) {
 			out.println(
-					"<h3><center>Bonjour, veuillez passer votre carte devant le lecteur pour vous indentifier...</center></h3>");
+					"<h3><center>Bonjour, veuillez passer votre carte devant le lecteur pour vous identifier...</center></h3>");
 		} else {
 			paramIdTerminalValue = URLDecoder.decode(request.getParameter("idTerminal"), "UTF-8");
 			out.println(
