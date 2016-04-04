@@ -16,7 +16,7 @@ public class Detection {
 	public JFrame doBrowserFrame(String url) throws IOException {
 		JEditorPane website = new JEditorPane(url);
 		JFrame frame = new JFrame("Browser RFID Detection");
-		frame.setSize(600, 300);
+		frame.setSize(600, 250);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		JScrollPane jScrollPane = new JScrollPane(website);
