@@ -34,7 +34,7 @@ public class Authentication implements Filter {
 
 		HttpSession session = req.getSession(false);
 
-		if (session == null && !(uri.endsWith("html") || uri.endsWith("Login") || uri.contains("RFIDAuthorization"))) {
+		if (session == null && !(uri.endsWith("html") || uri.endsWith("Login") || uri.contains("RFIDAuthorization") ||  uri.contains("images"))) {
 			this.context.log("Unauthorized access request");
 			res.sendRedirect("http://localhost:50001/webProject/login.html");
 		} else {

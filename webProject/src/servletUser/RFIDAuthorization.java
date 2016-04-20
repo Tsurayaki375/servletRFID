@@ -38,11 +38,24 @@ public class RFIDAuthorization extends HttpServlet {
 
 		if (paramIdCardValue == null && paramIdTerminalValue == null) {
 			out.println(
-					"<h3><center>Bonjour, veuillez passer votre carte devant le lecteur pour vous identifier...</center></h3>");
+					"<font size=\"5\"><center>Bonjour, veuillez passer votre carte devant le lecteur pour vous identifier...</center></font>");
+			out.println("<center><img src='" + request.getContextPath() + "/images/start.png' /></center>");
 		} else {
 			paramIdTerminalValue = URLDecoder.decode(request.getParameter("idTerminal"), "UTF-8");
 			out.println(
-					"<h3><center>" + myDb.identificationDb(paramIdCardValue, paramIdTerminalValue) + "</center></h3>");
+					"<font size=\"5\"><center>" + myDb.identificationDb(paramIdCardValue, paramIdTerminalValue) + "</center></font>");
+			System.out.println(myDb.getResultId());
+			switch (myDb.getResultId()){
+			case 1 :
+				out.println("<center><img src='" + request.getContextPath() + "/images/autorise.png' /></center>");
+				break;
+			case 2:
+				out.println("<center><img src='" + request.getContextPath() + "/images/refuse.png' /></center>");
+				break;
+			case 3:
+				out.println("<center><img src='" + request.getContextPath() + "/images/error.png' /></center>");
+				break;
+			}
 		}
 		out.close();
 	}

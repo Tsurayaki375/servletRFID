@@ -9,6 +9,12 @@ import java.sql.Statement;
 import constants.Constants;
 
 public class Db {
+	public int getResultId() {
+		return resultId;
+	}
+
+	private int resultId = 0;
+
 	public String identificationDb(String UID, String terminalID) {
 		String nom = "", prenom = "", poste = "", result = "";
 		Connection con = null;
@@ -36,11 +42,14 @@ public class Db {
 				result = nom + " " + prenom + "\n" + poste + "\nLvl." + secuEmploye + "\n\n";
 				if (secuEmploye >= secuPorte) {
 					result += "ACCES AUTORISE";
+					resultId = 1;
 				} else {
 					result += "ACCES REFUSE NIVEAU DE SECURITE INSUFFISANT";
+					resultId = 2;
 				}
 			} else {
 				result = "ERREUR : CARTE NON RECONNUE";
+				resultId = 3;
 			}
 		} catch (SQLException e) {
 		} finally {
