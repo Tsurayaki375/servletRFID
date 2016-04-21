@@ -49,25 +49,25 @@ public class SendUserPassage {
 				nom = rs.getString("e_Nom");
 				prenom = rs.getString("e_Prenom");
 				lvlSecuEmp = rs.getInt("e_lvlSecu");
-			}
 
-			ps = con.prepareStatement(sql2);
-			ps.setString(1, terminalID);
-			rs = ps.executeQuery();
-			if (rs.next()) {
-				lvlSecuPorte = rs.getInt("p_lvlSecu");
-			}
-			
-			String statut = calculStatut(lvlSecuEmp, lvlSecuPorte);
+				ps = con.prepareStatement(sql2);
+				ps.setString(1, terminalID);
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					lvlSecuPorte = rs.getInt("p_lvlSecu");
+				}
 
-			ps = con.prepareStatement(sql3);
-			ps.setString(1, UID);
-			ps.setString(2, terminalID);
-			ps.setString(3, currentDate);
-			ps.setString(4, statut);
-			ps.setString(5, nom);
-			ps.setString(6, prenom);
-			ps.executeUpdate();
+				String statut = calculStatut(lvlSecuEmp, lvlSecuPorte);
+
+				ps = con.prepareStatement(sql3);
+				ps.setString(1, UID);
+				ps.setString(2, terminalID);
+				ps.setString(3, currentDate);
+				ps.setString(4, statut);
+				ps.setString(5, nom);
+				ps.setString(6, prenom);
+				ps.executeUpdate();
+			}
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} catch (Exception e) {

@@ -43,7 +43,7 @@ public class RFIDAuthorization extends HttpServlet {
 		} else {
 			paramIdTerminalValue = URLDecoder.decode(request.getParameter("idTerminal"), "UTF-8");
 			out.println(
-					"<font size=\"5\"><center>" + myDb.identificationDb(paramIdCardValue, paramIdTerminalValue) + "</center></font>");
+					"<font size=\"5\"><center>" + myDb.identificationDb(paramIdCardValue, paramIdTerminalValue) + "</center></font><br />");
 			System.out.println(myDb.getResultId());
 			switch (myDb.getResultId()){
 			case 1 :
