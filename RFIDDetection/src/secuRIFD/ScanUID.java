@@ -67,6 +67,10 @@ public class ScanUID {
 
 	}
 
+	/**
+	 * The ATR (Answer To Reset) conveys information about the communication
+	 * parameters proposed by the card, and the card's nature and state.
+	 */
 	public String getATRcard() throws CardException {
 		String result = "";
 		if (isCardHere()) {
@@ -81,7 +85,11 @@ public class ScanUID {
 		return result;
 	}
 
-	public String getUidCard() throws CardException { 													
+	/**
+	 * Each smart card contains an integrated chip with a unique permanent
+	 * identification number burned-in during the manufacturing process : UID.
+	 */
+	public String getUidCard() throws CardException {
 		String result = "";
 		if (isCardHere()) {
 			byte[] cmdApduGetCardUid = new byte[] { (byte) 0xFF, (byte) 0xCA, (byte) 0x00, (byte) 0x00, (byte) 0x00 };

@@ -53,7 +53,7 @@ public class DeleteUser extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				con = DriverManager.getConnection(Constants.DB_URL, Constants.USER, Constants.PASS);
 
-				String sql1 = "SELECT e_Nom, e_Prenom, e_Poste, e_lvlSecu FROM employe WHERE e_ID = ?";
+				String sql1 = "SELECT * FROM employe WHERE e_ID = ?";
 				String sql2 = "DELETE FROM employe WHERE e_ID = ?";
 
 				ps = con.prepareStatement(sql1);

@@ -13,6 +13,10 @@ public class Detection {
 		this.id = id;
 	}
 
+	/**
+	 * Function to create a frame who displays a web page (in this case
+	 * a servlet response)
+	 */
 	public JFrame doBrowserFrame(String url) throws IOException {
 		JEditorPane website = new JEditorPane(url);
 		JFrame frame = new JFrame("Browser RFID Detection");
@@ -26,6 +30,12 @@ public class Detection {
 		return frame;
 	}
 
+	/**
+	 * Function to display a frame on the monitor in real time. If no card is
+	 * present, this is a "basic frame" who displays informations. Else, an other
+	 * frame appears and displays informations of the employee (firstname, lastname,
+	 * post, his security level and weither the access is granted or not).
+	 */
 	public void run() throws IOException {
 		JFrame mainFrame = doBrowserFrame("http://localhost:50001/webProject/RFIDAuthorization");
 		SendUserPassage sendUserPassage = new SendUserPassage();

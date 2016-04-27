@@ -17,6 +17,11 @@ public class SendUserPassage {
 			return "non autorise";
 	}
 
+	/**
+     * Checks if the UID already exists in the database. Then, compare the
+     * security level of the employee with the one of the terminal. Finally, inserts
+     * informations in the "historique" table.
+     */
 	@SuppressWarnings("resource")
 	public void run(String UID, String terminalID) {
 		final String url = "jdbc:mysql://localhost/securfid";
